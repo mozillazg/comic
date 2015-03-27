@@ -1,0 +1,2 @@
+# comic
+comic.mozillazg.com

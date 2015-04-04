@@ -1,36 +1,32 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
 
-	"./models"
+	"github.com/bmizerany/pat"
+	"github.com/mozillazg/comic/views"
 )
 
 func main() {
-	models.CreateTable("comic.db")
-	db, err := models.NewConnect("comic.db")
-	db.Begin()
-	defer db.Close()
-	c := models.NewComic("test", "http://baidu.com", "hello", "2015-01-02", db)
-	err = c.Save()
+
+	router := pat.New()
+	router.Get("/", http.HandlerFunc(views.LastComicView))
+	router.Get("/first", http.HandlerFunc(views.FirstComicView))
+	router.Get("/last", http.HandlerFunc(views.LastComicView))
+	router.Get("/random", http.HandlerFunc(views.RandomComicView))
+	router.Get("/admin", http.HandlerFunc(views.ListView))
+
+	router.Post("/api/comics", http.HandlerFunc(views.CreateAPIView))
+	router.Get("/api/comics/:id", http.HandlerFunc(views.GetAPIView))
+	router.Del("/api/comics/:id", http.HandlerFunc(views.DeleteAPIView))
+	router.Put("/api/comics/:id", http.HandlerFunc(views.UpdateAPIView))
+
+	router.Get("/:id", http.HandlerFunc(views.GetComicView))
+
+	http.Handle("/", router)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		panic(err)
+		log.Fatal("ListenAndServe: ", err)
 	}
-	fmt.Println(c)
-
-	c.Title = "test2"
-	c.Save()
-	fmt.Println(c)
-
-	c2 := models.NewComic("test", "http://baidu.com", "hello2", "2015-01-02", db)
-	c2.Save()
-	fmt.Println(c2)
-
-	c3, _ := models.FirstComic(db)
-	fmt.Println(c3)
-	c4, _ := models.LastComic(db)
-	fmt.Println(c4)
-	c5, _ := models.GetComic(db, 1)
-	fmt.Println(c5)
-
 }

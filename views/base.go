@@ -20,7 +20,7 @@ func getComic(w http.ResponseWriter, r *http.Request, db *sql.DB, n int64) (
 	c, err = models.GetComic(db, n)
 	if err != nil {
 		fmt.Printf("%p", err)
-		http.Error(w, http.StatusText(404), 404)
+		http.NotFound(w, r)
 		return
 	}
 	return
@@ -34,9 +34,9 @@ func renderTemplate(w http.ResponseWriter, c interface{}, name string, path stri
 
 func jsonReponse(w http.ResponseWriter, v interface{}, statusCode int) {
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
 	if statusCode != 204 {
 		b, _ := json.Marshal(v)
 		fmt.Fprint(w, string(b))
 	}
-	// w.WriteHeader(statusCode)
 }

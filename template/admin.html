@@ -35,7 +35,12 @@
                   <td>{{$c.Description}}</td>
                   <td>{{$c.Date}}</td>
                   <td>
-                    <a href="javascript: void(0);" data-id="{{$c.ID}}"
+                    <a href="javascript: void(0);"
+                      data-id="{{$c.ID}}"
+                      data-title="{{$c.Title}}"
+                      data-url="{{$c.ImageURL}}"
+                      data-desc="{{$c.Description}}"
+                      data-date="{{$c.Date}}"
                       class="edit-comic">edit</a>
                       <a href="javascript: void(0);" data-id="{{$c.ID}}"
                         class="delete-comic">delete</a>
@@ -98,11 +103,19 @@
     <script>
       $(function () {
         $(".new-comic").on("click", function() {
+          $("#form")[0].reset();
           $("#post-form").data("id");
           $("#myModal").modal("show");
         });
         $(".edit-comic").on("click", function() {
+          $("#form")[0].reset();
           $("#post-form").data("id", $(this).data("id"));
+
+          $("input#title").val($(this).data("title").trim());
+          $("input#url").val($(this).data("url").trim());
+          $("textarea#description").val($(this).data("desc").trim());
+          $("input#date").val($(this).data("date").trim());
+
           $("#myModal").modal("show");
         });
 

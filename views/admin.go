@@ -22,5 +22,5 @@ func ListView(w http.ResponseWriter, r *http.Request) {
 		Comics []*models.Comic
 	}
 	fmt.Println(c)
-	renderTemplate(w, data{c}, "admin.tpl", "template/admin.tpl")
+	renderTemplate(w, data{c}, "admin.html", "template/admin.html")
 }

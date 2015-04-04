@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	listen := ":8080"
 
 	router := pat.New()
 	router.Get("/", http.HandlerFunc(views.LastComicView))
@@ -25,7 +26,8 @@ func main() {
 	router.Get("/:id", http.HandlerFunc(views.GetComicView))
 
 	http.Handle("/", router)
-	err := http.ListenAndServe(":8080", nil)
+	log.Printf("listen %s\n", listen)
+	err := http.ListenAndServe(listen, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

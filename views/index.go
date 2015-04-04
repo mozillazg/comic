@@ -8,6 +8,9 @@ import (
 	"github.com/mozillazg/comic/models"
 )
 
+var tplPath = "template/index.html"
+var tplName = "index.html"
+
 func IndexView(w http.ResponseWriter, r *http.Request) {
 	LastComicView(w, r)
 }
@@ -19,13 +22,24 @@ func GetComicView(w http.ResponseWriter, r *http.Request) {
 
 	n := r.URL.Query().Get(":id")
 	id, err := strconv.ParseInt(n, 10, 64)
+	c, err := models.GetComic(db, id)
 	if err != nil {
 		fmt.Printf("%p", err)
-		http.Error(w, http.StatusText(404), 404)
+		http.NotFound(w, r)
 		return
 	}
-	c, err := models.GetComic(db, id)
-	renderTemplate(w, c, "index.tpl", "template/index.tpl")
+	prev, _ := models.PrevComic(db, id)
+	next, _ := models.NextComic(db, id)
+	if prev == nil {
+		prev = &models.Comic{}
+	}
+	if next == nil {
+		next = &models.Comic{}
+	}
+	data := struct {
+		Comic, Prev, Next *models.Comic
+	}{c, prev, next}
+	renderTemplate(w, data, tplName, tplPath)
 }
 
 func FirstComicView(w http.ResponseWriter, r *http.Request) {
@@ -36,10 +50,11 @@ func FirstComicView(w http.ResponseWriter, r *http.Request) {
 	c, err := models.FirstComic(db)
 	if err != nil {
 		fmt.Printf("%p", err)
-		http.Error(w, http.StatusText(404), 404)
+		http.NotFound(w, r)
 		return
 	}
-	renderTemplate(w, c, "index.tpl", "template/index.tpl")
+	url := urlFor(r, "/"+strconv.FormatInt(c.ID, 10))
+	http.Redirect(w, r, url, 302)
 }
 
 func LastComicView(w http.ResponseWriter, r *http.Request) {
@@ -50,10 +65,11 @@ func LastComicView(w http.ResponseWriter, r *http.Request) {
 	c, err := models.LastComic(db)
 	if err != nil {
 		fmt.Printf("%p", err)
-		http.Error(w, http.StatusText(404), 404)
+		http.NotFound(w, r)
 		return
 	}
-	renderTemplate(w, c, "index.tpl", "template/index.tpl")
+	url := urlFor(r, "/"+strconv.FormatInt(c.ID, 10))
+	http.Redirect(w, r, url, 302)
 }
 
 func RandomComicView(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +80,9 @@ func RandomComicView(w http.ResponseWriter, r *http.Request) {
 	c, err := models.RandomComic(db)
 	if err != nil {
 		fmt.Printf("%p", err)
-		http.Error(w, http.StatusText(404), 404)
+		http.NotFound(w, r)
+		return
 	}
-	renderTemplate(w, c, "index.tpl", "template/index.tpl")
+	url := urlFor(r, "/"+strconv.FormatInt(c.ID, 10))
+	http.Redirect(w, r, url, 302)
 }

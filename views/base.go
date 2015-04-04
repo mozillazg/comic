@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"text/template"
 
@@ -29,7 +30,8 @@ func getComic(w http.ResponseWriter, r *http.Request, db *sql.DB, n int64) (
 func renderTemplate(w http.ResponseWriter, c interface{}, name string, path string) {
 	b, _ := ioutil.ReadFile(path)
 	t, _ := template.New(name).Parse(string(b))
-	t.Execute(w, c)
+	err := t.Execute(w, c)
+	log.Println(err)
 }
 
 func jsonReponse(w http.ResponseWriter, v interface{}, statusCode int) {
@@ -39,4 +41,10 @@ func jsonReponse(w http.ResponseWriter, v interface{}, statusCode int) {
 		b, _ := json.Marshal(v)
 		fmt.Fprint(w, string(b))
 	}
+}
+
+func urlFor(r *http.Request, uri string) (url string) {
+	url = "http://" + r.Host + uri
+	log.Print(url)
+	return
 }

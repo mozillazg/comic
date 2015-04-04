@@ -249,3 +249,67 @@ func AllComic(db *sql.DB) (c []*Comic, err error) {
 	}
 	return
 }
+
+func PrevComic(db *sql.DB, n int64) (c *Comic, err error) {
+	rows, err := db.Query(
+		`select id, title, image_url, description, date from comic
+		where id<$1 order by id desc limit 1`, n,
+	)
+	if checkError(err) {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var id int64
+		var title string
+		var imageURL string
+		var description string
+		var date time.Time
+		err = rows.Scan(&id, &title, &imageURL, &description, &date)
+		if checkError(err) {
+			return nil, err
+		}
+		c = &Comic{
+			ID:          id,
+			Title:       title,
+			ImageURL:    imageURL,
+			Description: description,
+			Date:        date.Format("2006-01-02"),
+			db:          db,
+		}
+		return
+	}
+	return
+}
+
+func NextComic(db *sql.DB, n int64) (c *Comic, err error) {
+	rows, err := db.Query(
+		`select id, title, image_url, description, date from comic
+		where id>$1 order by id asc limit 1`, n,
+	)
+	if checkError(err) {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var id int64
+		var title string
+		var imageURL string
+		var description string
+		var date time.Time
+		err = rows.Scan(&id, &title, &imageURL, &description, &date)
+		if checkError(err) {
+			return nil, err
+		}
+		c = &Comic{
+			ID:          id,
+			Title:       title,
+			ImageURL:    imageURL,
+			Description: description,
+			Date:        date.Format("2006-01-02"),
+			db:          db,
+		}
+		return
+	}
+	return
+}

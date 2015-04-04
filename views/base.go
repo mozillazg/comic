@@ -7,13 +7,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"text/template"
 
 	_ "github.com/lib/pq"
 	"github.com/mozillazg/comic/models"
 )
 
-var dbPath = "user=ucomic password=comic dbname=comic"
+// var dbPath = "user=ucomic password=comic dbname=comic"
+var dbPath = os.Getenv("COMIC_DB")
 
 func getComic(w http.ResponseWriter, r *http.Request, db *sql.DB, n int64) (
 	c *models.Comic, err error,

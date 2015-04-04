@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/bmizerany/pat"
@@ -44,8 +45,8 @@ func BasicAuth(
 
 func main() {
 	listen := ":8080"
-	user := []byte("user")
-	pass := []byte("passwd")
+	user := []byte(os.Getenv("COMIC_USER"))
+	pass := []byte(os.Getenv("COMIC_PASSWD"))
 
 	router := pat.New()
 	router.Get("/", http.HandlerFunc(views.LastComicView))

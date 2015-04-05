@@ -20,44 +20,57 @@
 
     <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="">
-    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://tmp-images.qiniudn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="http://tmp&#45;images.qiniudn.com/bootstrap/3.3.4/css/bootstrap&#45;theme.min.css" rel="stylesheet"> -->
     <style type="text/css" media="all">
       body {
+        background: url("http://tmp-images.qiniudn.com/lark/noise-grey.v1.png");
         margin-top: 10px;
       }
       .archive {
         max-width: 430px;
       }
+      footer {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="main row">
-        <div class="center-block archive">
-          <p><a href="/">回首页</a></p>
-          <h1>存档</h1>
-          <ul class="list-unstyled">
-            {{range $c := .Comics }}
-            <li>
-              <ul class="list-inline">
-                <li>{{$c.Date}}</li>
-                <li><a href="/{{$c.ID}}">{{$c.Title}}</a></li>
-              </ul>
-            </li>
-            {{end}}
-          </ul>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="center-block archive">
+            <p><a href="/">回首页</a></p>
+            <h1>存档</h1>
+            <ul class="list-unstyled">
+              {{range $c := .Comics }}
+              <li>
+                <ul class="list-inline">
+                  <li>{{$c.Date}}</li>
+                  <li><a href="/{{$c.ID}}">{{$c.Title}}</a></li>
+                </ul>
+              </li>
+              {{end}}
+            </ul>
+          </div>
         </div>
       </div>
-
-      <hr>
-      <footer>
-        <ol class="list-inline text-center">
-          <li><a href="/archive">存档</a></li>
-          <li><a href="http://mozillazg.com" target="_blank">博客</a></li>
-        </ol>
-      </footer>
-
-
     </div>
+
+
+    <div class="container">
+      <div class="row">
+        <hr>
+        <footer>
+          <ol class="list-inline text-center">
+            <li><a href="/">首页</a></li>
+            <li><a href="/archive">存档</a></li>
+            <li><a href="http://mozillazg.com" target="_blank">博客</a></li>
+          </ol>
+        </footer>
+      </div>
+    </div>
+
   </body>
 </html>

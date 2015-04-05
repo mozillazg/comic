@@ -26,19 +26,10 @@
       body {
         margin-top: 1%;
       }
-      article {
-        text-align: center;
-      }
       article img {
-        display: block;
-        margin: 0 auto;
         max-width: 100%;
       }
-      .pagination {
-        display: center;
-      }
       .share {
-        margin: 5px auto;
         max-width: 200px;
       }
     </style>
@@ -67,16 +58,16 @@
 
         <!-- article start -->
         <div class="row">
-          <article>
+          <article class="center-block">
             <img src="{{.Comic.ImageURL}}" alt="{{.Comic.Title}}" />
-            <p class="note">{{.Comic.Description}} AT {{.Comic.Date}}</p>
+            <p class="note text-center">{{.Comic.Description}} AT {{.Comic.Date}}</p>
           </article>
         </div>
         <!-- article end -->
 
         <!-- .share start -->
         <div class="row">
-          <div class="share">
+          <div class="share center-block">
             <!-- JiaThis Button BEGIN -->
             <div class="jiathis_style">
               <a class="jiathis_button_tsina"></a>

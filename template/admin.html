@@ -32,7 +32,7 @@
               {{range $c := .Comics}}
               <tr>
                   <td>{{$c.ID}}</td>
-                  <td>{{$c.Title}}</td>
+                  <td><a href="/{{$c.ID}}" target="_blank">{{$c.Title}}</a></td>
                   <td>{{$c.ImageURL}}</td>
                   <td>{{$c.Description}}</td>
                   <td>{{$c.Date}}</td>

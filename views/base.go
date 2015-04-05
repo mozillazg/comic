@@ -33,7 +33,9 @@ func renderTemplate(w http.ResponseWriter, c interface{}, name string, path stri
 	b, _ := ioutil.ReadFile(path)
 	t, _ := template.New(name).Parse(string(b))
 	err := t.Execute(w, c)
-	log.Println(err)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func jsonReponse(w http.ResponseWriter, v interface{}, statusCode int) {

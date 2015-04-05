@@ -22,6 +22,11 @@ func GetComicView(w http.ResponseWriter, r *http.Request) {
 
 	n := r.URL.Query().Get(":id")
 	id, err := strconv.ParseInt(n, 10, 64)
+	if err != nil {
+		fmt.Printf("%p", err)
+		http.NotFound(w, r)
+		return
+	}
 	c, err := models.GetComic(db, id)
 	if err != nil {
 		fmt.Printf("%p", err)

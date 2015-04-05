@@ -29,6 +29,9 @@
       article img {
         max-width: 100%;
       }
+      article p {
+        margin-top: 5px;
+      }
       .share {
         max-width: 200px;
       }
@@ -58,8 +61,8 @@
 
         <!-- article start -->
         <div class="row">
-          <article class="center-block">
-            <img src="{{.Comic.ImageURL}}" alt="{{.Comic.Title}}" />
+          <article>
+            <img class="center-block" src="{{.Comic.ImageURL}}" alt="{{.Comic.Title}}" />
             <p class="note text-center">{{.Comic.Description}} AT {{.Comic.Date}}</p>
           </article>
         </div>

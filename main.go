@@ -44,7 +44,7 @@ func BasicAuth(
 }
 
 func main() {
-	listen := ":8080"
+	listen := os.Getenv("COMIC_LISTEN")
 	user := []byte(os.Getenv("COMIC_USER"))
 	pass := []byte(os.Getenv("COMIC_PASSWD"))
 

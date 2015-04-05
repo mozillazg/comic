@@ -3,19 +3,21 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <title>漫画——comic.mozillazg.com</title>
+    <title>{{.Comic.Title}} | comic.mozillazg.com</title>
     <meta name="description" content="欢乐氰化物,Cyanide & Happiness 汉化,cyanide and happiness,漫画,comic">
     <meta name="author" content="mozillazg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="http://comic.mozillazg.com">
+    <!-- <link rel="canonical" href="http://comic.mozillazg.com/{{.Comic.ID}}"> -->
     <meta name="author" content="mozillazg" />
     <!-- Open Graph tags -->
-    <meta property="og:site_name" content="Mozillazg's Comic Site" />
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="Mozillazg's Comic Site"/>
-    <meta property="og:url" content="http://comic.mozillazg.com"/>
-    <meta property="og:description" content="Mozillazg's Comic Site,欢乐氰化物,Cyanide & Happiness 汉化,cyanide and happiness,漫画,comic"/>
+    <meta property="og:site_name" content="mozillazg's Comic Site" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="mozillazg's Comic Site"/>
+    <meta property="og:url" content="http://comic.mozillazg.com/{{.Comic.ID}}"/>
+    <meta property="og:image" content="{{.Comic.ImageURL}}">
+    <meta property="og:description" content="mozillazg's Comic Site,欢乐氰化物,Cyanide & Happiness 汉化,cyanide and happiness,漫画,comic"/>
+    <!-- <meta property="article:publisher" content="https://www.facebook.com/mozillazg"> -->
 
     <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="">
@@ -30,9 +32,14 @@
       article img {
         display: block;
         margin: 0 auto;
+        max-width: 100%;
       }
       .pagination {
         display: center;
+      }
+      .share {
+        margin: 5px auto;
+        max-width: 200px;
       }
     </style>
   </head>
@@ -40,19 +47,17 @@
     <div class="container">
       <div class="main row">
 
-        <!-- .pagination -->
+        <!-- .pagination start -->
         <div class="row">
           <nav>
             <ul class="list-inline pager">
               <li><a rel="first" href="/first">|&lt;</a></li>
-              <li><a rel="prev"
-                  href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}"
-                  >&lt;</a>
+              <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
+                <a rel="prev" href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
               </li>
               <li><a rel="random" href="/random">?</a></li>
-              <li><a rel="next"
-                  href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}"
-                  >&gt;</a>
+              <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
+                <a rel="next" href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
               </li>
               <li><a rel="first" href="/last">&gt;|</a></li>
             </ul>
@@ -60,34 +65,46 @@
         </div>
         <!-- .pagination end -->
 
-        <!-- article -->
+        <!-- article start -->
         <div class="row">
           <article>
             <img src="{{.Comic.ImageURL}}" alt="{{.Comic.Title}}" />
-            <p class="note">{{.Comic.Description}}</p>
+            <p class="note">{{.Comic.Description}} AT {{.Comic.Date}}</p>
           </article>
         </div>
         <!-- article end -->
 
-        <!-- .share -->
+        <!-- .share start -->
         <div class="row">
-          <div class="share"></div>
+          <div class="share">
+            <!-- JiaThis Button BEGIN -->
+            <div class="jiathis_style">
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_weixin"></a>
+              <a class="jiathis_button_douban"></a>
+              <a class="jiathis_button_tqq"></a>
+              <a class="jiathis_button_twitter"></a>
+              <a class="jiathis_button_googleplus"></a>
+              <a class="jiathis_button_fb"></a>
+              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+              <a class="jiathis_counter_style"></a>
+            </div>
+            <!-- JiaThis Button END -->
+          </div>
         </div>
         <!-- .share end -->
 
-        <!-- .pagination -->
+        <!-- .pagination start -->
         <div class="row">
           <nav>
             <ul class="list-inline pager">
               <li><a rel="first" href="/first">|&lt;</a></li>
-              <li><a rel="prev"
-                  href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}"
-                  >&lt;</a>
+              <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
+                <a rel="prev" href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
               </li>
               <li><a rel="random" href="/random">?</a></li>
-              <li><a rel="next"
-                  href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}"
-                  >&gt;</a>
+              <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
+                <a rel="next" href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
               </li>
               <li><a rel="first" href="/last">&gt;|</a></li>
             </ul>
@@ -95,19 +112,37 @@
         </div>
         <!-- .pagination end -->
 
-        <!-- .more -->
+        <!-- .more start -->
         <div class="row">
           <div class="more"></div>
         </div>
         <!-- .more end -->
 
-        <!-- .comment -->
+        <!-- .comment start-->
         <div class="row">
-          <div class="comment"></div>
+          <div class="comment">
+            <!-- 多说评论框 start -->
+            <div class="ds-thread" data-thread-key="{{.Comic.ID}}" data-title="{{.Comic.Title}}" data-url="http://comic.mozillazg.com/{{.Comic.ID}}"></div>
+            <!-- 多说评论框 end -->
+          </div>
         </div>
         <!-- .comment end -->
-
       </div>
     </div>
+
+    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"comic-mozillazg"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
   </body>
 </html>

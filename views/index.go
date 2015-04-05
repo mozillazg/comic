@@ -91,3 +91,19 @@ func RandomComicView(w http.ResponseWriter, r *http.Request) {
 	url := urlFor(r, "/"+strconv.FormatInt(c.ID, 10))
 	http.Redirect(w, r, url, 302)
 }
+
+func ArchiveView(w http.ResponseWriter, r *http.Request) {
+	db, err := models.NewConnect(dbPath)
+	db.Begin()
+	defer db.Close()
+
+	c, err := models.AllComic(db)
+	if err != nil {
+		fmt.Printf("%p", err)
+		http.Error(w, http.StatusText(404), 404)
+	}
+	type data struct {
+		Comics []*models.Comic
+	}
+	renderTemplate(w, data{c}, "archive.html", "template/archive.html")
+}

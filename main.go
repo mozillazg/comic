@@ -60,6 +60,7 @@ func main() {
 	router.Del("/api/comics/:id", http.HandlerFunc(BasicAuth(views.DeleteAPIView, user, pass)))
 	router.Put("/api/comics/:id", http.HandlerFunc(BasicAuth(views.UpdateAPIView, user, pass)))
 
+	router.Get("/archive", http.HandlerFunc(views.ArchiveView))
 	router.Get("/:id", http.HandlerFunc(views.GetComicView))
 
 	http.Handle("/", router)

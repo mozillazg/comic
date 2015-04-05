@@ -21,6 +21,5 @@ func ListView(w http.ResponseWriter, r *http.Request) {
 	type data struct {
 		Comics []*models.Comic
 	}
-	fmt.Println(c)
 	renderTemplate(w, data{c}, "admin.html", "template/admin.html")
 }

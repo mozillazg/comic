@@ -219,11 +219,19 @@ func checkError(err error) bool {
 	return false
 }
 
-func AllComic(db *sql.DB) (c []*Comic, err error) {
-	rows, err := db.Query(
-		`select id, title, image_url, description, date from comic
+func AllComic(db *sql.DB, url string) (c []*Comic, err error) {
+	var rows *sql.Rows
+	if url != "" {
+		rows, err = db.Query(
+			`select id, title, image_url, description, date from comic
+		where image_url=$1 order by date desc`, url,
+		)
+	} else {
+		rows, err = db.Query(
+			`select id, title, image_url, description, date from comic
 		order by date desc`,
-	)
+		)
+	}
 	if checkError(err) {
 		return nil, err
 	}

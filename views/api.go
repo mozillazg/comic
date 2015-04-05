@@ -82,3 +82,18 @@ func GetAPIView(w http.ResponseWriter, r *http.Request) {
 
 	jsonReponse(w, c, 200)
 }
+
+func ListAPIView(w http.ResponseWriter, r *http.Request) {
+	db, err := models.NewConnect(dbPath)
+	db.Begin()
+	defer db.Close()
+
+	url := r.URL.Query().Get("url")
+	c, err := models.AllComic(db, url)
+	if err != nil || c == nil {
+		fmt.Printf("%p", err)
+		http.Error(w, http.StatusText(404), 404)
+		return
+	}
+	jsonReponse(w, c, 200)
+}

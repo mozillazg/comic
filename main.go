@@ -56,6 +56,7 @@ func main() {
 	router.Get("/admin", http.HandlerFunc(BasicAuth(views.ListView, user, pass)))
 
 	router.Post("/api/comics", http.HandlerFunc(BasicAuth(views.CreateAPIView, user, pass)))
+	router.Get("/api/comics", http.HandlerFunc(BasicAuth(views.ListAPIView, user, pass)))
 	router.Get("/api/comics/:id", http.HandlerFunc(BasicAuth(views.GetAPIView, user, pass)))
 	router.Del("/api/comics/:id", http.HandlerFunc(BasicAuth(views.DeleteAPIView, user, pass)))
 	router.Put("/api/comics/:id", http.HandlerFunc(BasicAuth(views.UpdateAPIView, user, pass)))

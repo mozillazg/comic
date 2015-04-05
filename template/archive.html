@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>存档 | comic.mozillazg.com</title>
+    <meta name="description" content="欢乐氰化物,Cyanide & Happiness 汉化,cyanide and happiness,漫画,comic">
+    <meta name="author" content="mozillazg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="canonical" href="http://comic.mozillazg.com/archive"> -->
+    <meta name="author" content="mozillazg" />
+    <!-- Open Graph tags -->
+    <meta property="og:site_name" content="mozillazg's Comic Site" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="mozillazg's Comic Site"/>
+    <meta property="og:url" content="http://comic.mozillazg.com/archive"/>
+    <meta property="og:description" content="mozillazg's Comic Site,欢乐氰化物,Cyanide & Happiness 汉化,cyanide and happiness,漫画,comic"/>
+    <!-- <meta property="article:publisher" content="https://www.facebook.com/mozillazg"> -->
+
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css" media="all">
+      body {
+        margin-top: 10px;
+      }
+      .archive {
+        max-width: 430px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main row">
+        <div class="center-block archive">
+          <p><a href="/">回首页</a></p>
+          <h1>存档</h1>
+          <ul class="list-unstyled">
+            {{range $c := .Comics }}
+            <li>
+              <ul class="list-inline">
+                <li>{{$c.Date}}</li>
+                <li><a href="/{{$c.ID}}">{{$c.Title}}</a></li>
+              </ul>
+            </li>
+            {{end}}
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+      <footer>
+        <ol class="list-inline text-center">
+          <li><a href="/archive">存档</a></li>
+          <li><a href="http://mozillazg.com" target="_blank">博客</a></li>
+        </ol>
+      </footer>
+
+
+    </div>
+  </body>
+</html>

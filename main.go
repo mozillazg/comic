@@ -12,34 +12,36 @@ import (
 	"github.com/mozillazg/comic/views"
 )
 
-func BasicAuth(
-	f func(http.ResponseWriter, *http.Request), user, pass []byte,
-) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		const basicAuthPrefix string = "Basic "
+type ViewFunc func(http.ResponseWriter, *http.Request)
 
-		// Get the Basic Authentication credentials
+func BasicAuth(f ViewFunc, user, passwd []byte) ViewFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		basicAuthPrefix := "Basic "
+
+		// 获取 request header
 		auth := r.Header.Get("Authorization")
+		// 如果是 http basic auth
 		if strings.HasPrefix(auth, basicAuthPrefix) {
-			// Check credentials
+			// 解码认证信息
 			payload, err := base64.StdEncoding.DecodeString(
 				auth[len(basicAuthPrefix):],
 			)
 			if err == nil {
 				pair := bytes.SplitN(payload, []byte(":"), 2)
 				if len(pair) == 2 && bytes.Equal(pair[0], user) &&
-					bytes.Equal(pair[1], pass) {
-					// Delegate request to the given handle
+					bytes.Equal(pair[1], passwd) {
+					// 执行被装饰的函数
 					f(w, r)
 					return
 				}
 			}
 		}
 
-		// Request Basic Authentication otherwise
-		w.Header().Set("WWW-Authenticate", "Basic realm=Restricted")
-		http.Error(w, http.StatusText(http.StatusUnauthorized),
-			http.StatusUnauthorized)
+		// 认证失败，提示 401 Unauthorized
+		// Restricted 可以改成其他的值，作用类似于 session ,这样就不会每次访问页面都提示登录
+		w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
+		// 401 状态码
+		w.WriteHeader(http.StatusUnauthorized)
 	}
 }
 

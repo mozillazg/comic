@@ -69,11 +69,11 @@
               <ul class="list-inline pager">
                 <li><a href="/first">|&lt;</a></li>
                 <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
-                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt; Prev</a>
+                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
                 </li>
-                <li><a href="/random">? Random</a></li>
+                <li><a href="/random">?</a></li>
                 <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
-                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">Next &gt;</a>
+                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
                 </li>
                 <li><a href="/">&gt;|</a></li>
               </ul>
@@ -118,11 +118,11 @@
               <ul class="list-inline pager">
                 <li><a href="/first">|&lt;</a></li>
                 <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
-                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt; Prev</a>
+                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
                 </li>
-                <li><a href="/random">? Random</a></li>
+                <li><a href="/random">?</a></li>
                 <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
-                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">Next &gt;</a>
+                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
                 </li>
                 <li><a href="/">&gt;|</a></li>
               </ul>

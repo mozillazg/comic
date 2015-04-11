@@ -62,19 +62,20 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+
           <!-- .pagination start -->
           <div class="row">
             <nav>
               <ul class="list-inline pager">
-                <li><a rel="first" href="/first">|&lt;</a></li>
+                <li><a href="/first">|&lt;</a></li>
                 <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
-                  <a rel="prev" href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
+                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt; Prev</a>
                 </li>
-                <li><a rel="random" href="/random">?</a></li>
+                <li><a href="/random">? Random</a></li>
                 <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
-                  <a rel="next" href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
+                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">Next &gt;</a>
                 </li>
-                <li><a rel="first" href="/last">&gt;|</a></li>
+                <li><a href="/">&gt;|</a></li>
               </ul>
             </nav>
           </div>
@@ -115,15 +116,15 @@
           <div class="row">
             <nav>
               <ul class="list-inline pager">
-                <li><a rel="first" href="/first">|&lt;</a></li>
+                <li><a href="/first">|&lt;</a></li>
                 <li {{if eq .Prev.ID 0}}class="disabled"{{end}}>
-                  <a rel="prev" href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt;</a>
+                  <a href="{{if ne .Prev.ID 0}}/{{.Prev.ID}}{{else}}#{{end}}">&lt; Prev</a>
                 </li>
-                <li><a rel="random" href="/random">?</a></li>
+                <li><a href="/random">? Random</a></li>
                 <li {{if eq .Next.ID 0}}class="disabled"{{end}}>
-                  <a rel="next" href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">&gt;</a>
+                  <a href="{{if ne .Next.ID 0}}/{{.Next.ID}}{{else}}#{{end}}">Next &gt;</a>
                 </li>
-                <li><a rel="first" href="/last">&gt;|</a></li>
+                <li><a href="/">&gt;|</a></li>
               </ul>
             </nav>
           </div>

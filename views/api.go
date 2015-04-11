@@ -11,7 +11,6 @@ import (
 
 func CreateAPIView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c := models.NewComic(
@@ -31,7 +30,6 @@ func CreateAPIView(w http.ResponseWriter, r *http.Request) {
 
 func UpdateAPIView(w http.ResponseWriter, r *http.Request) {
 	db, _ := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	n := r.URL.Query().Get(":id")
@@ -52,7 +50,6 @@ func UpdateAPIView(w http.ResponseWriter, r *http.Request) {
 
 func DeleteAPIView(w http.ResponseWriter, r *http.Request) {
 	db, _ := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	n := r.URL.Query().Get(":id")
@@ -69,7 +66,6 @@ func DeleteAPIView(w http.ResponseWriter, r *http.Request) {
 
 func GetAPIView(w http.ResponseWriter, r *http.Request) {
 	db, _ := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	n := r.URL.Query().Get(":id")
@@ -85,7 +81,6 @@ func GetAPIView(w http.ResponseWriter, r *http.Request) {
 
 func ListAPIView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	url := r.URL.Query().Get("url")

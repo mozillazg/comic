@@ -17,7 +17,6 @@ func IndexView(w http.ResponseWriter, r *http.Request) {
 
 func GetComicView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	n := r.URL.Query().Get(":id")
@@ -49,7 +48,6 @@ func GetComicView(w http.ResponseWriter, r *http.Request) {
 
 func FirstComicView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c, err := models.FirstComic(db)
@@ -64,7 +62,6 @@ func FirstComicView(w http.ResponseWriter, r *http.Request) {
 
 func LastComicView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c, err := models.LastComic(db)
@@ -79,7 +76,6 @@ func LastComicView(w http.ResponseWriter, r *http.Request) {
 
 func RandomComicView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c, err := models.RandomComic(db)
@@ -94,7 +90,6 @@ func RandomComicView(w http.ResponseWriter, r *http.Request) {
 
 func ArchiveView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c, err := models.AllComic(db, "")

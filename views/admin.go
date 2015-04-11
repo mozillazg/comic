@@ -10,7 +10,6 @@ import (
 
 func ListView(w http.ResponseWriter, r *http.Request) {
 	db, err := models.NewConnect(dbPath)
-	db.Begin()
 	defer db.Close()
 
 	c, err := models.AllComic(db, "")

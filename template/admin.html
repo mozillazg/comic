@@ -116,7 +116,7 @@
         $(".new-comic").on("click", function() {
           $("#form")[0].reset();
           $("#post-form").data("id");
-          $("#myModal").modal("show");
+          $("#myModal").modal("toggle");
         });
         $(".edit-comic").on("click", function() {
           $("#form")[0].reset();
@@ -127,7 +127,7 @@
           $("textarea#description").val($(this).data("desc").trim());
           $("input#date").val($(this).data("date").trim());
 
-          $("#myModal").modal("show");
+          $("#myModal").modal("toggle");
         });
 
       // new comic
@@ -147,6 +147,8 @@
           success: function(data) {
             if (confirm("reload?")) {
               location.reload();
+            } else {
+              $("#myModal").modal("toggle");
             }
           }
         });
@@ -166,6 +168,7 @@
               location.reload();
             } else {
                 $tr.remove();
+                $("#myModal").modal("toggle");
             }
           }
         });

@@ -11,6 +11,11 @@
     <link rel="shortcut icon" href="">
     <link href="http://tmp-images.qiniudn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://tmp-images.qiniudn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
+    <style>
+      td img {
+        max-width: 400px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -23,7 +28,7 @@
               <tr>
                   <th>ID</th>
                   <th>Title</th>
-                  <th>Url</th>
+                  <th>Image</th>
                   <th>Description</th>
                   <th>Date</th>
                   <th>Action</th>
@@ -34,7 +39,10 @@
               <tr>
                   <td>{{$c.ID}}</td>
                   <td><a href="/{{$c.ID}}" target="_blank">{{$c.Title}}</a></td>
-                  <td>{{$c.ImageURL}}</td>
+                  <td>
+                    <a href="{{$c.ImageURL}}" target="_blank">
+                      <img src="{{$c.ImageURL}}"></a>
+                  </td>
                   <td>{{$c.Description}}</td>
                   <td>{{$c.Date}}</td>
                   <td>

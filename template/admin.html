@@ -11,6 +11,11 @@
     <link rel="shortcut icon" href="">
     <link href="http://tmp-images.qiniudn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://tmp-images.qiniudn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
+    <style>
+      td img {
+        max-width: 400px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -23,7 +28,7 @@
               <tr>
                   <th>ID</th>
                   <th>Title</th>
-                  <th>Url</th>
+                  <th>Image</th>
                   <th>Description</th>
                   <th>Date</th>
                   <th>Action</th>
@@ -34,7 +39,10 @@
               <tr>
                   <td>{{$c.ID}}</td>
                   <td><a href="/{{$c.ID}}" target="_blank">{{$c.Title}}</a></td>
-                  <td>{{$c.ImageURL}}</td>
+                  <td>
+                    <a href="{{$c.ImageURL}}" target="_blank">
+                      <img src="{{$c.ImageURL}}"></a>
+                  </td>
                   <td>{{$c.Description}}</td>
                   <td>{{$c.Date}}</td>
                   <td>
@@ -108,7 +116,7 @@
         $(".new-comic").on("click", function() {
           $("#form")[0].reset();
           $("#post-form").data("id");
-          $("#myModal").modal("show");
+          $("#myModal").modal("toggle");
         });
         $(".edit-comic").on("click", function() {
           $("#form")[0].reset();
@@ -119,7 +127,7 @@
           $("textarea#description").val($(this).data("desc").trim());
           $("input#date").val($(this).data("date").trim());
 
-          $("#myModal").modal("show");
+          $("#myModal").modal("toggle");
         });
 
       // new comic
@@ -137,7 +145,11 @@
           url: url,
           data: data,
           success: function(data) {
-            location.reload();
+            if (confirm("reload?")) {
+              location.reload();
+            } else {
+              $("#myModal").modal("toggle");
+            }
           }
         });
       });
@@ -147,11 +159,17 @@
           return false;
         }
         var id = $(this).data("id");
+        var $tr = $(this).parent().parent();
         $.ajax({
           type: "DELETE",
           url: "/api/comics/" + id,
           success: function(data) {
-            location.reload();
+            if (confirm("reload?")) {
+              location.reload();
+            } else {
+                $tr.remove();
+                $("#myModal").modal("toggle");
+            }
           }
         });
       });

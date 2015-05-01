@@ -4,6 +4,11 @@
   <link type="text/html" rel="alternate" href="http://comic.mozillazg.com"/>
   <link type="application/atom+xml" rel="self" href="http://comic.mozillazg.com/atom"/>
   <title>mozillazg 翻译的漫画</title>
+  <updated>{{.LastUpdate}}T08:00:00Z</updated>
+  <author>
+      <name>mozillazg</name>
+      <email>mozillazg101@gmail.com</email>
+  </author>
 
 {{$site := "http://comic.mozillazg.com"}}
 {{$baseTitle := " | comic.mozillazg.com"}}

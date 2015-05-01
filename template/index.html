@@ -1,5 +1,5 @@
-{{$site := "http://comic.mozillazg.com/"}}
-{{$baseTitle := "[汉化] | comic.mozillazg.com"}}
+{{$site := "http://comic.mozillazg.com"}}
+{{$baseTitle := " | comic.mozillazg.com"}}
 {{$id := .Comic.ID}}
 {{$title := .Comic.Title}}
 {{$image := .Comic.ImageURL}}
@@ -11,20 +11,21 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <title>{{$title}}{{$baseTitle}}</title>
+    <title>【汉化】{{$title}}{{$baseTitle}}</title>
     <meta name="description" content="{{$desc}} AT {{$date}}
 快乐氰化物/Cyanide & Happiness/其他漫画 汉化/翻译">
     <meta name="keywords" content="快乐氰化物,Cyanide & Happiness,汉化,cyanide and happiness,漫画,comic,翻译">
     <meta name="author" content="mozillazg">
+    <link href="{{$site}}/atom" rel="alternate" title="atom" type="application/atom+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="canonical" href="{{$site}}{{$id}}"> -->
+    <!-- <link rel="canonical" href="{{$site}}/{{$id}}"> -->
     <meta name="author" content="mozillazg" />
     <!-- Open Graph tags -->
     <meta property="og:site_name" content="mozillazg's Comic Site" />
     <meta property="og:type" content="article"/>
-    <meta property="og:title" content="{{$title}}{{$baseTitle}}"/>
-    <meta property="og:url" content="{{$site}}{{$id}}"/>
+    <meta property="og:title" content="【汉化】{{$title}}{{$baseTitle}}"/>
+    <meta property="og:url" content="{{$site}}/{{$id}}"/>
     <meta property="og:image" content="{{$image}}">
     <meta property="og:description" content="{{$desc}} AT {{$date}}
 快乐氰化物/Cyanide & Happiness/其他漫画 汉化/翻译">
@@ -141,7 +142,7 @@
           <div class="row">
             <div class="comment">
               <!-- 多说评论框 start -->
-              <div class="ds-thread" data-thread-key="{{$id}}" data-title="{{$title}}" data-url="{{$site}}{{$id}}"></div>
+              <div class="ds-thread" data-thread-key="{{$id}}" data-title="{{$title}}" data-url="{{$site}}/{{$id}}"></div>
               <!-- 多说评论框 end -->
             </div>
           </div>
@@ -187,7 +188,7 @@
 
     <div class="hide" style="display: none !important;">
       <div vocab="http://schema.org/" typeof="Article">
-        <span property="headline">{{$title}}{{$baseTitle}}</span>
+        <span property="headline">【汉化】{{$title}}{{$baseTitle}}</span>
         <span property="description">{{$desc}} AT {{$date}}</span>
         <meta property="image" content="{{$image}}"/>
         <meta property="datePublished" content="{{$date}}T08:00:00+08:00"/>

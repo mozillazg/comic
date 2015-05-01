@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="zh-CN">
+  <id>http://comic.mozillazg.com</id>
+  <link type="text/html" rel="alternate" href="http://comic.mozillazg.com"/>
+  <link type="application/atom+xml" rel="self" href="http://comic.mozillazg.com/atom"/>
+  <title>mozillazg 翻译的漫画</title>
+
+{{$site := "http://comic.mozillazg.com"}}
+{{$baseTitle := " | comic.mozillazg.com"}}
+
+
+{{range $c := .Comics }}
+  <entry>
+      <id>{{$site}}/{{$c.ID}}</id>
+      <published>{{$c.Date}}T08:00:00Z</published>
+      <updated>{{$c.Date}}T08:00:00Z</updated>
+      <link type="text/html" rel="alternate" href="{{$site}}"/>
+      <title type="html">&#12304;&#27721;&#21270;&#12305;{{$c.Title | html}}{{$baseTitle}}</title>
+      <author>
+          <name>mozillazg</name>
+          <email>mozillazg101@gmail.com</email>
+      </author>
+      <media:thumbnail height="30" width="30" url="https://avatars1.githubusercontent.com/u/485054?v=3&amp;s=30"/>
+      <content type="html">
+          &lt;img src=&quot;{{$c.ImageURL}}&quot; alt=&quot;{{$c.Title | html}}&quot; /&gt;
+          &lt;p&gt;{{$c.Description | html}}&lt;br /&gt;
+          AT {{$c.Date}}
+          &lt;/p&gt;
+      </content>
+  </entry>
+{{end}}
+
+</feed>

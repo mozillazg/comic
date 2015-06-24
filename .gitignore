@@ -28,3 +28,5 @@ bin/
 build/
 *.tar.gz
 tools/
+static/*.js
+*~

@@ -38,7 +38,6 @@ func BasicAuth(f ViewFunc, user, passwd []byte) ViewFunc {
 		}
 
 		// 认证失败，提示 401 Unauthorized
-		// Restricted 可以改成其他的值，作用类似于 session ,这样就不会每次访问页面都提示登录
 		w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
 		// 401 状态码
 		w.WriteHeader(http.StatusUnauthorized)
